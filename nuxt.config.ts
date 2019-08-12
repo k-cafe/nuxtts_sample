@@ -32,7 +32,7 @@ const config: NuxtConfiguration = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/page-title-setter.client', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */

@@ -16,7 +16,7 @@ import Footer from '@/presenters/Footer.vue'
 import Body from '@/presenters/Body.vue'
 import Toolbar from '@/presenters/Toolbar.vue'
 import Navigator from '@/presenters/Navigator.vue'
-import Title from '@/presenters/Title.vue'
+import PageTitle from '@/presenters/PageTitle.vue'
 
 @Component({
   components: {
@@ -24,7 +24,7 @@ import Title from '@/presenters/Title.vue'
     'app-body': Body,
     'app-toolbar': Toolbar,
     'app-navigator': Navigator,
-    'app-title': Title
+    'app-title': PageTitle
   }
 })
 export default class DefaultLayout extends Vue {
