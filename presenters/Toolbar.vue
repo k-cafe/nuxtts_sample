@@ -8,12 +8,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Drawer } from '~/interfaces/drawer.interface'
 
 @Component
 export default class ToolbarComponent extends Vue {
   private title = 'Nuxt.js Sample'
 
   @Prop()
-  drawer!: Object /* { isOpened: false }  */
+  drawer!: Drawer
 }
 </script>

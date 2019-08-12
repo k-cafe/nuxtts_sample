@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Drawer } from '~/interfaces/drawer.interface'
 
 @Component
 export default class NavigatorComponent extends Vue {
@@ -39,6 +40,6 @@ export default class NavigatorComponent extends Vue {
   ]
 
   @Prop()
-  drawer!: Object /* { isOpened: false }  */
+  drawer!: Drawer /* { isOpened: false }  */
 }
 </script>

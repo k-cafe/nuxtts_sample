@@ -63,13 +63,15 @@
 </template>
 
 <script>
+import { Component, Vue } from 'nuxt-property-decorator'
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
-export default {
+@Component({
   components: {
-    Logo,
-    VuetifyLogo
+    logo: Logo,
+    'vuetify-logo': VuetifyLogo
   }
-}
+})
+export default class IndexComponent extends Vue {}
 </script>

@@ -17,6 +17,7 @@ import Body from '@/presenters/Body.vue'
 import Toolbar from '@/presenters/Toolbar.vue'
 import Navigator from '@/presenters/Navigator.vue'
 import PageTitle from '@/presenters/PageTitle.vue'
+import { Drawer } from '@/interfaces/drawer.interface'
 
 @Component({
   components: {
@@ -28,6 +29,6 @@ import PageTitle from '@/presenters/PageTitle.vue'
   }
 })
 export default class DefaultLayout extends Vue {
-  private drawer = { isOpened: false }
+  private drawer: Drawer = { isOpened: false }
 }
 </script>
