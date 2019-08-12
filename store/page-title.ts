@@ -1,6 +1,6 @@
-import { MappingObject } from '~/typealias';
+import { MappingObject } from '~/typealias'
 import { Mapper } from '~/models/mapper.model'
-import { Commit } from 'vuex';
+import { Commit } from 'vuex'
 
 const mutationTypes = {
   SET_CURRENT_TITLE: '[Title] Set Current Title'
@@ -31,7 +31,7 @@ export const state = (): State => ({
     index: 'TOP',
     inspire: 'INSPIRE'
   },
-  currentPageTitle: 'PAGE NOT FOUN'
+  currentPageTitle: 'PAGE NOT FOUND'
 })
 
 
