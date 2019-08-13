@@ -24,6 +24,7 @@
         "./*"
       ]
     },
+    "typeRoots": ["types", "node_modules/@types"],
     "types": [
       "@types/node",
       "@nuxt/vue-app"

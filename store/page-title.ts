@@ -14,15 +14,15 @@ const getterTypes = {
   CURRENT_PAGE_TITLE: '[Title] Get Current Page Title'
 }
 
+interface State {
+  pageTitles: MappingObject<string>,
+  currentPageTitle?: string
+}
+
 export const commandTypes = {
   getterTypes,
   mutationTypes,
   actionTypes
-}
-
-interface State {
-  pageTitles: MappingObject<string>,
-  currentPageTitle?: string
 }
 
 export const state = (): State => ({
@@ -36,17 +36,17 @@ export const state = (): State => ({
 
 
 export const getters = {
-  [commandTypes.getterTypes.CURRENT_PAGE_TITLE]: (state: State) => state.currentPageTitle
+  [getterTypes.CURRENT_PAGE_TITLE]: (state: State) => state.currentPageTitle
 }
   
 export const mutations = {
-  [commandTypes.mutationTypes.SET_CURRENT_TITLE]: (state: State, { title }: { title: string }) => {
+  [mutationTypes.SET_CURRENT_TITLE]: (state: State, { title }: { title: string }) => {
     state.currentPageTitle = title
   }
 }
   
 export const actions = {
-  [commandTypes.actionTypes.CHANGE_PAGE]: (
+  [actionTypes.CHANGE_PAGE]: (
     { state, commit }: { state: State, commit: Commit },
     { pageTitle }: { pageTitle: string }
   ) => {

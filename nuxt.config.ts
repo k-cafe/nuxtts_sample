@@ -41,7 +41,7 @@ const config: NuxtConfiguration = {
    ** 上から順番に読み込まれる。同じものがある場合は、Mixin的に処理される
    */
   plugins: [
-    { src: '~/plugins/firebase', mode: 'all' },
+    { src: '~/plugins/firebase-injector', mode: 'all' },
     { src: '~/plugins/auth-guard', mode: 'all' },
     { src: '~/plugins/page-title-setter.client', mode: 'client' }
   ],

@@ -56,10 +56,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Mover } from '~/interfaces/mover.interface'
+import { CanMove } from '~/interfaces/can-move.interface'
 
 @Component
-export default class LoginComponent extends Vue implements Mover {
+export default class LoginComponent extends Vue implements CanMove {
   // data
   private email = ''
   private password = ''
