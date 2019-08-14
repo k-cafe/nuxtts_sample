@@ -40,16 +40,16 @@ export const getters = {
 }
   
 export const mutations = {
-  [mutationTypes.SET_CURRENT_TITLE]: (state: State, { title }: { title: string }) => {
+  [mutationTypes.SET_CURRENT_TITLE] (state: State, { title }: { title: string }) {
     state.currentPageTitle = title
   }
 }
   
 export const actions = {
-  [actionTypes.CHANGE_PAGE]: (
+  [actionTypes.CHANGE_PAGE] (
     { state, commit }: { state: State, commit: Commit },
     { pageTitle }: { pageTitle: string }
-  ) => {
+  ) {
     const title = Mapper.value<string>(pageTitle, state.pageTitles)
     commit(mutationTypes.SET_CURRENT_TITLE, { title })
   }

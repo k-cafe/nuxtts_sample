@@ -44,10 +44,10 @@ export const getters = {
 }
 
 export const mutations = {
-  [mutationTypes.SET_SIGNIN_USER]: (state: State, { currentUser }: { currentUser: firebase.User }) => {
+  [mutationTypes.SET_SIGNIN_USER] (state: State, { currentUser }: { currentUser: firebase.User }) {
     state.currentUser = currentUser
   },
-  [mutationTypes.SET_ID_TOKEN_RESULT]: (state: State, { idTokenResult }: { idTokenResult: firebase.auth.IdTokenResult }) => {
+  [mutationTypes.SET_ID_TOKEN_RESULT] (state: State, { idTokenResult }: { idTokenResult: firebase.auth.IdTokenResult }) {
     state.idTokenResult = idTokenResult
   }
 }

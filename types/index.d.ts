@@ -13,3 +13,10 @@ declare module '@nuxt/vue-app/types/index' {
     $auth?: firebase.auth.Auth
   }
 }
+
+declare module 'vuex/types/index' {
+  interface  StoreContext {
+    $auth?: firebase.auth.Auth
+    $firestore?: firebase.firestore.Firestore
+  }
+}
