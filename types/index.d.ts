@@ -1,4 +1,3 @@
-
 import firebase from 'firebase'
 
 declare module '@nuxt/vue-app/types/index' {
@@ -7,13 +6,7 @@ declare module '@nuxt/vue-app/types/index' {
   }
 }
 
-declare module 'vuex/types/index' {
-  // action内のthisのinterface
-  interface InjectedContext {
-    $auth?: firebase.auth.Auth
-    $firestore?: firebase.firestore.Firestore
-  }
-}
+declare module 'vuex/types/index' {}
 
 declare namespace VuexExtention {
   interface GetterNode<S> {
@@ -26,5 +19,11 @@ declare namespace VuexExtention {
 
   interface ActionNode<S, C> {
     [key: string]: (node: C, payload?: any) => void
+  }
+
+  // action内のthisのinterfaceで使用してください
+  interface InjectedContext {
+    $auth?: firebase.auth.Auth
+    $firestore?: firebase.firestore.Firestore
   }
 }

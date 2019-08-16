@@ -1,6 +1,6 @@
 import { MappingObject } from '~/typealias'
 import { Mapper } from '~/models/mapper.model'
-import { Commit, AppActionContext, ActionContext } from 'vuex'
+import { ActionContext } from 'vuex'
 import { VuexExtention } from '~/types/index'
 
 const mutationTypes = {
@@ -16,7 +16,7 @@ const getterTypes = {
 }
 
 interface State {
-  pageTitles: MappingObject<string>,
+  pageTitles: MappingObject<string>
   currentPageTitle?: string
 }
 
@@ -35,18 +35,23 @@ export const state = (): State => ({
   currentPageTitle: 'PAGE NOT FOUND'
 })
 
-
 export const getters: VuexExtention.GetterNode<State> = {
   [getterTypes.CURRENT_PAGE_TITLE]: (state: State) => state.currentPageTitle
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
-  [mutationTypes.SET_CURRENT_TITLE]: (state: State, { title }: { title: string }) => {
+  [mutationTypes.SET_CURRENT_TITLE]: (
+    state: State,
+    { title }: { title: string }
+  ) => {
     state.currentPageTitle = title
   }
 }
 
-export const actions: VuexExtention.ActionNode<State, ActionContext<State, any>> = {
+export const actions: VuexExtention.ActionNode<
+  State,
+  ActionContext<State, any>
+> = {
   [actionTypes.CHANGE_PAGE](
     { state, commit }: ActionContext<State, any>,
     { pageTitle }: { pageTitle: string }

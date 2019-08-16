@@ -1,7 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 import NuxtConfiguration from '@nuxt/config'
 
-
 const config: NuxtConfiguration = {
   mode: 'spa',
   /*
@@ -24,7 +23,8 @@ const config: NuxtConfiguration = {
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+        href:
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
       }
     ]
   },
@@ -42,6 +42,7 @@ const config: NuxtConfiguration = {
    */
   plugins: [
     { src: '~/plugins/firebase-injector', mode: 'all' },
+    { src: '~/plugins/vuex-initializer', mode: 'all' },
     { src: '~/plugins/auth-guard', mode: 'all' },
     { src: '~/plugins/page-title-setter.client', mode: 'client' }
   ],
@@ -73,7 +74,7 @@ const config: NuxtConfiguration = {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     icons: {
-      iconfont: 'mdi', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
+      iconfont: 'mdi' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
     },
     theme: {
       dark: true,
