@@ -30,7 +30,8 @@ export const state = (): State => ({
   pageTitles: {
     UNKNOWN: 'PAGE NOT FOUND',
     index: 'TOP',
-    inspire: 'INSPIRE'
+    inspire: 'INSPIRE',
+    login: 'LOGIN'
   },
   currentPageTitle: 'PAGE NOT FOUND'
 })

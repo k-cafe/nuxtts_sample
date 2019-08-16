@@ -1,9 +1,7 @@
-export class AuthRepository {
-  auth: firebase.auth.Auth
+import { auth } from '~/plugins/firebase-initializer'
 
-  constructor(auth: firebase.auth.Auth) {
-    this.auth = auth
-  }
+export class AuthRepository {
+  constructor() {}
 
   async signInWithEmailAndPassword({
     email,
@@ -12,10 +10,10 @@ export class AuthRepository {
     email: string
     password: string
   }): Promise<firebase.auth.UserCredential> {
-    return this.auth.signInWithEmailAndPassword(email, password)
+    return auth.signInWithEmailAndPassword(email, password)
   }
 
   signOut(): Promise<void> {
-    return this.auth.signOut()
+    return auth.signOut()
   }
 }

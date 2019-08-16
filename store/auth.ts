@@ -60,11 +60,8 @@ export const mutations: VuexExtention.MutationNode<State> = {
   ) {
     state.idTokenResult = idTokenResult
   },
-  [mutationTypes.SET_REPOSITORY](
-    state: State,
-    { auth }: { auth: firebase.auth.Auth }
-  ) {
-    state.authRepository = new AuthRepository(auth)
+  [mutationTypes.SET_REPOSITORY](state: State) {
+    state.authRepository = new AuthRepository()
   }
 }
 
@@ -73,7 +70,17 @@ export const actions: VuexExtention.ActionNode<
   ActionContext<State, any>
 > = {
   [actionTypes.INITIALIZE]({ commit }: ActionContext<State, any>) {
-    const globalThis: VuexExtention.InjectedContext = this
-    commit(mutationTypes.SET_REPOSITORY, { auth: globalThis.$auth })
+    commit(mutationTypes.SET_REPOSITORY)
+  },
+  async [actionTypes.SIGN_IN](
+    { commit, state }: ActionContext<State, any>,
+    { email, password }: { email: string; password: string }
+  ) {
+    if (isNullOrUndefined(state.authRepository)) return
+    const credential = await state.authRepository.signInWithEmailAndPassword({
+      email,
+      password
+    })
+    return isNullOrUndefined(credential)
   }
 }

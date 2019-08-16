@@ -57,6 +57,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { CanMove } from '~/interfaces/can-move.interface'
+import { commandTypes as AuthCommand } from '~/store/auth'
 
 @Component
 export default class LoginComponent extends Vue implements CanMove {
@@ -80,8 +81,17 @@ export default class LoginComponent extends Vue implements CanMove {
     )
   }
   // methods
-  private login() {
+  private async login() {
     this.isAuthorizing = true
+    const isSucceeded = await this.$store.dispatch(
+      `auth/${AuthCommand.actionTypes.SIGN_IN}`,
+      {
+        email: this.email,
+        password: this.password
+      }
+    )
+
+    if (!isSucceeded) return
     this.moveTo()
   }
 
