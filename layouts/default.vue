@@ -29,6 +29,6 @@ import { Drawer } from '@/interfaces/drawer.interface'
   }
 })
 export default class DefaultLayout extends Vue {
-  private drawer: Drawer = { isOpened: false }
+  private drawer: Drawer = { state: { isOpened: false } }
 }
 </script>

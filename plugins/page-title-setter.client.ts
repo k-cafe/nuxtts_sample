@@ -1,12 +1,15 @@
 import { commandTypes } from '~/store/page-title'
 import { Route } from 'vue-router'
 import { Context } from '@nuxt/vue-app'
+import { Mapper } from '~/models/mapper.model'
+import { PageTitles } from '~/mapping-objects/page-title.mapping.object'
 
 export default ({ app, redirect, store }: Context) => {
   if (typeof app.router === 'undefined') return
   app.router.beforeEach((to: Route, _: Route, next: (args?: any) => void) => {
-    store.dispatch(`page-title/${commandTypes.actionTypes.CHANGE_PAGE}`, {
-      pageTitle: to.name
+    const pageTitle = Mapper.value(to.name as string, PageTitles)
+    store.commit(`page-title/${commandTypes.mutationTypes.SET_CURRENT_TITLE}`, {
+      title: pageTitle
     })
     next()
   })

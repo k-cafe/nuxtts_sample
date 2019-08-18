@@ -1,3 +1,5 @@
 export interface Drawer {
-  isOpened: boolean
+  state: {
+    isOpened: boolean
+  }
 }

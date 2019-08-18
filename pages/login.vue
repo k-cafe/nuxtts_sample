@@ -91,8 +91,8 @@ export default class LoginComponent extends Vue implements CanMove {
       }
     )
 
-    if (!isSucceeded) return
-    this.moveTo()
+    if (!isSucceeded) this.moveTo()
+    this.isAuthorizing = false
   }
 
   moveTo() {}

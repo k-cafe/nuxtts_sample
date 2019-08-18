@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer.isOpened" clipped fixed app>
+  <v-navigation-drawer v-model="drawer.state.isOpened" clipped fixed app>
     <v-list>
       <v-list-item
         v-for="(item, i) in items"
@@ -7,7 +7,7 @@
         :to="item.to"
         router
         exact
-        @click.stop="drawer.isOpened = !drawer.isOpened"
+        @click.stop="drawer.isOpened = !drawer.state.isOpened"
       >
         <v-list-item-action>
           <v-icon>{{ item.icon }}</v-icon>
