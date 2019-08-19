@@ -3,6 +3,7 @@ import { isNullOrUndefined } from 'util'
 import { VuexExtention } from '~/types/'
 import { ActionContext, Commit } from 'vuex/types/index'
 import { AuthRepository } from '~/repositories/auth.repository'
+import { Nullable } from '~/typealias';
 
 const mutationTypes: VuexExtention.StoreProperty = {
   SET_SIGNIN_USER: '[Auth] Set Signin User',
@@ -23,9 +24,9 @@ const getterTypes: VuexExtention.StoreProperty = {
 }
 
 interface State {
-  currentUser?: firebase.User | null
-  idTokenResult?: firebase.auth.IdTokenResult | null
-  authRepository?: AuthRepository | null
+  currentUser: Nullable<firebase.User>
+  idTokenResult: Nullable<firebase.auth.IdTokenResult>
+  authRepository: Nullable<AuthRepository>
 }
 
 export const commandTypes: VuexExtention.CommandTypes = {
@@ -34,7 +35,11 @@ export const commandTypes: VuexExtention.CommandTypes = {
   actionTypes
 }
 
-export const state = (): State => ({})
+export const state = (): State => ({
+  currentUser: null,
+  idTokenResult: null,
+  authRepository: null
+})
 
 export const getters: VuexExtention.GetterNode<State> = {
   [getterTypes.IS_AUTHORIZED]: (state: State) =>

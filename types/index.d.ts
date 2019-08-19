@@ -9,11 +9,11 @@ import firebase from 'firebase'
 declare namespace VuexExtention {
   type Unwatcher = () => void
 
-  type StoreProperty = {
+  interface StoreProperty {
     [key: string]: string
   }
 
-  type CommandTypes = {
+  interface CommandTypes {
     getterTypes: StoreProperty
     mutationTypes: StoreProperty
     actionTypes: StoreProperty

@@ -1,8 +1,6 @@
 <template>
   <v-app-bar clipped-left fixed app>
-    <v-app-bar-nav-icon
-      @click.stop="drawer.state.isOpened = !drawer.state.isOpened"
-    />
+    <v-app-bar-nav-icon @click.stop="isOpened = !isOpened" />
     <v-toolbar-title v-text="title" />
     <v-spacer />
   </v-app-bar>
@@ -18,5 +16,13 @@ export default class ToolbarComponent extends Vue {
 
   @Prop()
   drawer!: Drawer
+
+  private get isOpened(): boolean {
+    return this.drawer.isOpened
+  }
+
+  private set isOpened(isOpened: boolean) {
+    this.drawer.isOpened = isOpened
+  }
 }
 </script>

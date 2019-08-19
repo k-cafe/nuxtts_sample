@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer.state.isOpened" clipped fixed app>
+  <v-navigation-drawer v-model="isOpened" clipped fixed app>
     <v-list>
       <v-list-item
         v-for="(item, i) in items"
@@ -7,7 +7,7 @@
         :to="item.to"
         router
         exact
-        @click.stop="drawer.isOpened = !drawer.state.isOpened"
+        @click.stop="isOpened = !isOpened"
       >
         <v-list-item-action>
           <v-icon>{{ item.icon }}</v-icon>
@@ -26,6 +26,9 @@ import { Drawer } from '~/interfaces/drawer.interface'
 
 @Component
 export default class NavigatorComponent extends Vue {
+  @Prop()
+  drawer!: Drawer
+
   private items = [
     {
       icon: 'mdi-apps',
@@ -39,7 +42,12 @@ export default class NavigatorComponent extends Vue {
     }
   ]
 
-  @Prop()
-  drawer!: Drawer /* { isOpened: false }  */
+  private get isOpened(): boolean {
+    return this.drawer.isOpened
+  }
+
+  private set isOpened(isOpened: boolean) {
+    this.drawer.isOpened = isOpened
+  }
 }
 </script>

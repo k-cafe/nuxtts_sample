@@ -13,13 +13,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import ErrorComponent from '../presenters/Error.vue'
-import Footer from '@/presenters/Footer.vue'
-import Body from '@/presenters/Body.vue'
-import Toolbar from '@/presenters/Toolbar.vue'
-import Navigator from '@/presenters/Navigator.vue'
-import PageTitle from '@/presenters/PageTitle.vue'
-import { Drawer } from '@/interfaces/drawer.interface'
+import ErrorComponent from '~/components/presenters/Error.vue'
+import Footer from '~/components/presenters/Footer.vue'
+import Body from '~/components/presenters/Body.vue'
+import Toolbar from '~/components/presenters/Toolbar.vue'
+import Navigator from '~/components/presenters/Navigator.vue'
+import PageTitle from '~/components/presenters/PageTitle.vue'
+import { Drawer } from '~/interfaces/drawer.interface'
 
 @Component({
   components: {
@@ -32,7 +32,7 @@ import { Drawer } from '@/interfaces/drawer.interface'
   }
 })
 export default class DefaultLayout extends Vue {
-  private drawer: Drawer = { state: { isOpened: false } }
+  private drawer: Drawer = { isOpened: false }
 }
 </script>
 

@@ -8,10 +8,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Nullable } from '../typealias'
-import { LifecycleHook } from '../interfaces/lifecycle-hook.interface'
-import { AppError } from '../models/error.model'
-import { VuexExtention } from '../types'
+import { Nullable } from '~/typealias'
+import { LifecycleHook } from '~/interfaces/lifecycle-hook.interface'
+import { AppError } from '~/models/error.model'
+import { VuexExtention } from '~/types'
 import { commandTypes as ErrorCommand } from '~/store/error'
 
 @Component
