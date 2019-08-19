@@ -43,7 +43,7 @@ const config: NuxtConfiguration = {
   plugins: [
     { src: '~/plugins/firebase-initializer', mode: 'all' },
     { src: '~/plugins/vuex-initializer', mode: 'all' },
-    { src: '~/plugins/auth-guard', mode: 'all' },
+    // { src: '~/plugins/auth-guard', mode: 'all' },
     { src: '~/plugins/page-title-setter.client', mode: 'client' }
   ],
   /*

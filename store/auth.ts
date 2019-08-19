@@ -3,7 +3,7 @@ import { isNullOrUndefined } from 'util'
 import { VuexExtention } from '~/types/'
 import { ActionContext, Commit } from 'vuex/types/index'
 import { AuthRepository } from '~/repositories/auth.repository'
-import { Nullable } from '~/typealias';
+import { Nullable, UserId } from '~/typealias';
 
 const mutationTypes: VuexExtention.StoreProperty = {
   SET_SIGNIN_USER: '[Auth] Set Signin User',
@@ -24,7 +24,7 @@ const getterTypes: VuexExtention.StoreProperty = {
 }
 
 interface State {
-  currentUser: Nullable<firebase.User>
+  currentUserUid: Nullable<UserId>
   idTokenResult: Nullable<firebase.auth.IdTokenResult>
   authRepository: Nullable<AuthRepository>
 }
@@ -36,14 +36,14 @@ export const commandTypes: VuexExtention.CommandTypes = {
 }
 
 export const state = (): State => ({
-  currentUser: null,
+  currentUserUid: null,
   idTokenResult: null,
   authRepository: null
 })
 
 export const getters: VuexExtention.GetterNode<State> = {
   [getterTypes.IS_AUTHORIZED]: (state: State) =>
-    !isNullOrUndefined(state.currentUser),
+    !isNullOrUndefined(state.currentUserUid),
   [getterTypes.IS_TOKEN_EXPIRED]: (state: State) => {
     if (isNullOrUndefined(state.idTokenResult)) return true
     const expirationTime = +state.idTokenResult.expirationTime
@@ -55,9 +55,9 @@ export const getters: VuexExtention.GetterNode<State> = {
 export const mutations: VuexExtention.MutationNode<State> = {
   [mutationTypes.SET_SIGNIN_USER](
     state: State,
-    { currentUser }: { currentUser: firebase.User }
+    { uid }: { uid: UserId }
   ) {
-    state.currentUser = currentUser
+    state.currentUserUid = uid
   },
   [mutationTypes.SET_ID_TOKEN_RESULT](
     state: State,
@@ -87,5 +87,11 @@ export const actions: VuexExtention.ActionNode<
       password
     })
     return isNullOrUndefined(credential)
+  },
+  async [actionTypes.WATCH_AUTH_STATE] ({ state, commit }: ActionContext<State, any>) {
+    if (state.authRepository === null) return
+    const firebaseUser = await state.authRepository.fetchCurrentUserIfSignedIn()
+    if (firebaseUser === null) return
+    commit(mutationTypes.SET_SIGNIN_USER, { uid: firebaseUser.uid })
   }
 }
