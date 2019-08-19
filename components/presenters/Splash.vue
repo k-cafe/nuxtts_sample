@@ -25,8 +25,19 @@ import { commandTypes as AuthCommand } from '~/store/auth'
 @Component
 export default class SplashComponent extends Vue
   implements LifecycleHook, CanMove {
-  private loading = true
+  private isLoading = true
   private unsubscribe: Nullable<VuexExtention.Unsubscriber> = null
+
+  private setSignedInUserSubscriber() {
+    return this.$store.subscribe((mutation) => {
+      if (this.isNoSignedInUser(mutation.type)) return
+      if (!this.isAuthorized) {
+        this.redirectLoginPage()
+      } else {
+        this.showCurrentPage()
+      }
+    })
+  }
 
   private isNoSignedInUser(mutationType: string): boolean {
     const setSignInUser = `auth/${AuthCommand.mutationTypes.SET_SIGNIN_USER}`
@@ -38,28 +49,25 @@ export default class SplashComponent extends Vue
     return this.$store.getters[isAuthorized]
   }
 
+  private redirectLoginPage() {
+    this.moveTo()
+  }
+
+  private showCurrentPage() {
+    this.isLoading = false
+  }
+
   moveTo() {
     this.$nuxt.$router.replace({ name: 'login' }).then(() => {
       // Pageの描画処理を待つ
       setTimeout(() => {
-        this.loading = false
+        this.isLoading = false
       }, 300)
     })
   }
 
-  private showCurrentPageIfAuthorized() {
-    return this.$store.subscribe((mutation) => {
-      if (this.isNoSignedInUser(mutation.type)) return
-      if (!this.isAuthorized) {
-        this.moveTo()
-      } else {
-        this.loading = false
-      }
-    })
-  }
-
   created() {
-    this.unsubscribe = this.showCurrentPageIfAuthorized()
+    this.unsubscribe = this.setSignedInUserSubscriber()
   }
 
   beforeDestroy() {
