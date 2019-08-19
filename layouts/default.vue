@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+    <app-splash class="splash" />
     <app-navigator :drawer="drawer" />
     <app-toolbar :drawer="drawer" />
     <v-content>
@@ -13,7 +14,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import ErrorComponent from '~/components/presenters/Error.vue'
+import Splash from '../components/presenters/Splash.vue'
+import AppError from '~/components/presenters/Error.vue'
 import Footer from '~/components/presenters/Footer.vue'
 import Body from '~/components/presenters/Body.vue'
 import Toolbar from '~/components/presenters/Toolbar.vue'
@@ -28,7 +30,8 @@ import { Drawer } from '~/interfaces/drawer.interface'
     'app-toolbar': Toolbar,
     'app-navigator': Navigator,
     'app-title': PageTitle,
-    'app-error': ErrorComponent
+    'app-error': AppError,
+    'app-splash': Splash
   }
 })
 export default class DefaultLayout extends Vue {
@@ -42,5 +45,12 @@ export default class DefaultLayout extends Vue {
   position: absolute;
   z-index: 1;
   margin-top: -1px;
+}
+
+.splash {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
 }
 </style>

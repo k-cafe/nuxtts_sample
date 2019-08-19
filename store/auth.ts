@@ -91,7 +91,12 @@ export const actions: VuexExtention.ActionNode<
   async [actionTypes.WATCH_AUTH_STATE] ({ state, commit }: ActionContext<State, any>) {
     if (state.authRepository === null) return
     const firebaseUser = await state.authRepository.fetchCurrentUserIfSignedIn()
-    if (firebaseUser === null) return
+    if (firebaseUser === null) {
+      commit(mutationTypes.SET_SIGNIN_USER, { uid: null })
+      return
+    }
     commit(mutationTypes.SET_SIGNIN_USER, { uid: firebaseUser.uid })
+    const idTokenResult = await firebaseUser.getIdTokenResult()
+    commit(mutationTypes.SET_ID_TOKEN_RESULT, { idTokenResult })
   }
 }

@@ -8,6 +8,7 @@ import firebase from 'firebase'
 
 declare namespace VuexExtention {
   type Unwatcher = () => void
+  type Unsubscriber = () => void
 
   interface StoreProperty {
     [key: string]: string
