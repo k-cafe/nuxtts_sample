@@ -36,7 +36,7 @@ export default class ErrorComponent extends Vue implements LifecycleHook {
     )
   }
 
-  destroyed() {
+  beforeDestroy() {
     if (this.unwatch !== null) {
       this.unwatch()
     }
