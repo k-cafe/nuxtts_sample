@@ -1,6 +1,6 @@
 <template>
   <transition v-if="hasError" appear>
-    <v-alert :value="true" type="error"
+    <v-alert :value="true" type="error" @input="close" dismissible
       >[ {{ error.code }} ] {{ error.description }}</v-alert
     >
   </transition>
@@ -30,6 +30,10 @@ export default class ErrorComponent extends Vue implements LifecycleHook {
       (error) => (this.error = error),
       { deep: true }
     )
+  }
+
+  private close() {
+    this.error = null
   }
 
   created() {
