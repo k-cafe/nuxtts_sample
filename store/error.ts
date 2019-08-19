@@ -1,5 +1,6 @@
 import { VuexExtention } from '~/types'
 import { AppError } from '~/models/error.model'
+import { Nullable } from '~/typealias';
 
 export const mutationTypes: VuexExtention.StoreProperty = {
   SET_ERROR: '[Error] Set Error',
@@ -8,7 +9,8 @@ export const mutationTypes: VuexExtention.StoreProperty = {
 
 export const getterTypes: VuexExtention.StoreProperty = {
   ERROR: '[Error] Error',
-  HAS_ERROR: '[Error] Has Error'
+  HAS_ERROR: '[Error] Has Error',
+  STATE: '[Error] State'
 }
 
 export const commandTypes: VuexExtention.CommandTypes = {
@@ -18,22 +20,23 @@ export const commandTypes: VuexExtention.CommandTypes = {
 }
 
 interface State {
-  error?: AppError
+  error: Nullable<AppError>
 }
 
-export const state = (): State => ({})
+export const state = (): State => ({
+  error: null
+})
 
 export const getters: VuexExtention.GetterNode<State> = {
   [getterTypes.ERROR]: (state: State) => state.error,
-  [getterTypes.HAS_ERROR]: (state: State) => typeof state.error !== 'undefined'
+  [getterTypes.HAS_ERROR]: (state: State) => state.error !== null
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
   [mutationTypes.SET_ERROR](state: State, { error }: { error: AppError }) {
-    console.log(error)
     state.error = error
   },
   [mutationTypes.REMOVE_ERROR](state: State) {
-    delete state.error
+    state.error = null
   }
 }

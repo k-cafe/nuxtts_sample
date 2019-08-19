@@ -1,8 +1,4 @@
-import { MappingObject } from '~/typealias'
-import { Mapper } from '~/models/mapper.model'
-import { ActionContext } from 'vuex'
 import { VuexExtention } from '~/types/index'
-import { PageTitles } from '~/mapping-objects/page-title.mapping.object'
 
 const mutationTypes: VuexExtention.StoreProperty = {
   SET_CURRENT_TITLE: '[Title] Set Current Title'
