@@ -1,8 +1,8 @@
 <template>
   <transition v-if="hasError" appear>
-    <v-alert :value="true" type="error" class="alert">
-      [ {{ error.code }} ] {{ error.description }}
-    </v-alert>
+    <v-alert :value="true" type="error"
+      >[ {{ error.code }} ] {{ error.description }}</v-alert
+    >
   </transition>
 </template>
 
@@ -45,24 +45,14 @@ export default class ErrorComponent extends Vue implements LifecycleHook {
 </script>
 
 <style scoped>
-.v-enter {
-  opacity: 0;
-}
-.v-enter-to {
-  opacity: 1;
-}
-.v-enter-active {
-  transition: opacity 300ms ease-out;
-  transform: translateY(-60px);
-}
-.v-leave {
-  opacity: 1;
-}
-.v-leave-to {
-  opacity: 0;
-}
+.v-enter-active,
 .v-leave-active {
-  transition: opacity 300ms reverse;
-  transform: translateY(-60px);
+  transform: translate(0px, 0px);
+  transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+
+.v-enter,
+.v-leave-to {
+  transform: translateY(-100px) translateY(0px);
 }
 </style>

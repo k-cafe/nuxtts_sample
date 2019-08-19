@@ -16,5 +16,10 @@ export const FirebaseAuthorizationErrors: MappingObject<AppError> = {
     code: 'FA0002',
     message: 'WRONG PASSWORD',
     description: '認証エラーです'
+  }),
+  'auth/too-many-requests': new AppError({
+    code: 'FA0003',
+    message: 'TOO MANY REQUESTS',
+    description: 'アクセスが集中しています。しばらく経ってからもう一度アクセスしてください。'
   })
 }
