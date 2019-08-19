@@ -7,7 +7,7 @@ import firebase from 'firebase'
 // }
 
 declare namespace VuexExtention {
-  type Unsubscriber = () => void
+  type Unwatcher = () => void
 
   type StoreProperty = {
     [key: string]: string

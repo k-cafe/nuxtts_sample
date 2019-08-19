@@ -17,17 +17,17 @@ import { commandTypes as ErrorCommand } from '~/store/error'
 @Component
 export default class ErrorComponent extends Vue implements LifecycleHook {
   private error: Nullable<AppError> = null
-  private unsubscribe: Nullable<VuexExtention.Unsubscriber> = null
+  private unwatch: Nullable<VuexExtention.Unwatcher> = null
 
   private get hasError() {
     return this.error !== null
   }
 
   created() {
-    this.unsubscribe = this.observeErrorStore()
+    this.unwatch = this.watchErrorStore()
   }
 
-  observeErrorStore() {
+  watchErrorStore() {
     const errorType = `error/${ErrorCommand.getterTypes.ERROR}`
     return this.$store.watch<AppError>(
       (state, getter) => getter[errorType] as AppError,
@@ -37,8 +37,8 @@ export default class ErrorComponent extends Vue implements LifecycleHook {
   }
 
   destroyed() {
-    if (this.unsubscribe !== null) {
-      this.unsubscribe()
+    if (this.unwatch !== null) {
+      this.unwatch()
     }
   }
 }
