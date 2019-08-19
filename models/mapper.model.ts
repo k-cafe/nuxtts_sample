@@ -1,4 +1,4 @@
-import { MappingObject } from "~/typealias";
+import { MappingObject } from '~/typealias'
 
 export class Mapper {
   static value<T>(key: string, mappingObject: MappingObject<T>): T {

@@ -1,6 +1,6 @@
 import { VuexExtention } from '~/types'
 import { AppError } from '~/models/error.model'
-import { Nullable } from '~/typealias';
+import { Nullable } from '~/typealias'
 
 export const mutationTypes: VuexExtention.StoreProperty = {
   SET_ERROR: '[Error] Set Error',

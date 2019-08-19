@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="loading" fluid fill-height style="background: #D8D8D8">
+  <v-container v-if="isLoading" fluid fill-height class="background">
     <v-layout align-center row wrap>
       <v-flex xs12 class="text-center">
         <v-progress-circular
@@ -76,3 +76,9 @@ export default class SplashComponent extends Vue
   }
 }
 </script>
+
+<style scoped>
+.background {
+  background-color: #d8d8d8;
+}
+</style>

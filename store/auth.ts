@@ -1,9 +1,9 @@
-import moment from 'moment'
 import { isNullOrUndefined } from 'util'
-import { VuexExtention } from '~/types/'
+import moment from 'moment'
 import { ActionContext, Commit } from 'vuex/types/index'
+import { VuexExtention } from '~/types/'
 import { AuthRepository } from '~/repositories/auth.repository'
-import { Nullable, UserId } from '~/typealias';
+import { Nullable, UserId } from '~/typealias'
 
 const mutationTypes: VuexExtention.StoreProperty = {
   SET_SIGNIN_USER: '[Auth] Set Signin User',
@@ -53,10 +53,7 @@ export const getters: VuexExtention.GetterNode<State> = {
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
-  [mutationTypes.SET_SIGNIN_USER](
-    state: State,
-    { uid }: { uid: UserId }
-  ) {
+  [mutationTypes.SET_SIGNIN_USER](state: State, { uid }: { uid: UserId }) {
     state.currentUserUid = uid
   },
   [mutationTypes.SET_ID_TOKEN_RESULT](
@@ -88,7 +85,10 @@ export const actions: VuexExtention.ActionNode<
     })
     return isNullOrUndefined(credential)
   },
-  async [actionTypes.WATCH_AUTH_STATE] ({ state, commit }: ActionContext<State, any>) {
+  async [actionTypes.WATCH_AUTH_STATE]({
+    state,
+    commit
+  }: ActionContext<State, any>) {
     if (state.authRepository === null) return
     const firebaseUser = await state.authRepository.fetchCurrentUserIfSignedIn()
     if (firebaseUser === null) {

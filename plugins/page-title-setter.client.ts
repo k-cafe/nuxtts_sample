@@ -1,6 +1,6 @@
-import { commandTypes } from '~/store/page-title'
 import { Route } from 'vue-router'
 import { Context } from '@nuxt/vue-app'
+import { commandTypes } from '~/store/page-title'
 import { Mapper } from '~/models/mapper.model'
 import { PageTitles } from '~/mapping-objects/page-title.mapping.object'
 

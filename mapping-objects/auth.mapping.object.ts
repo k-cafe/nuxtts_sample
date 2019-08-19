@@ -20,6 +20,7 @@ export const FirebaseAuthorizationErrors: MappingObject<AppError> = {
   'auth/too-many-requests': new AppError({
     code: 'FA0003',
     message: 'TOO MANY REQUESTS',
-    description: 'アクセスが集中しています。しばらく経ってからもう一度アクセスしてください。'
+    description:
+      'アクセスが集中しています。しばらく経ってからもう一度アクセスしてください。'
   })
 }
