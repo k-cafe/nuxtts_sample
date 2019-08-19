@@ -7,6 +7,8 @@ import firebase from 'firebase'
 // }
 
 declare namespace VuexExtention {
+  type Unsubscriber = () => void
+
   type StoreProperty = {
     [key: string]: string
   }
@@ -18,7 +20,7 @@ declare namespace VuexExtention {
   }
 
   interface GetterNode<S> {
-    [key: string]: ((state: S) => void) | ((state: S) => (...args: any) => void)
+    [key: string]: ((state: S) => void) | ((state: S) => (...args: any[]) => void)
   }
 
   interface MutationNode<S> {

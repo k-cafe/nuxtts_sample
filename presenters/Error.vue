@@ -1,6 +1,8 @@
 <template>
   <transition v-if="hasError" appear>
-    <v-alert :value="true" type="error" class="alert"></v-alert>
+    <v-alert :value="true" type="error" class="alert">
+      [ {{ error.code }} ] {{ error.description }}
+    </v-alert>
   </transition>
 </template>
 
@@ -9,30 +11,35 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import { Nullable } from '../typealias'
 import { LifecycleHook } from '../interfaces/lifecycle-hook.interface'
 import { AppError } from '../models/error.model'
+import { VuexExtention } from '../types'
 import { commandTypes as ErrorCommand } from '~/store/error'
 
 @Component
 export default class ErrorComponent extends Vue implements LifecycleHook {
   private error: Nullable<AppError> = null
+  private unsubscribe: Nullable<VuexExtention.Unsubscriber> = null
 
   private get hasError() {
     return this.error !== null
   }
 
   created() {
-    this.observeErrorStore()
+    this.unsubscribe = this.observeErrorStore()
   }
 
   observeErrorStore() {
-    this.$store.subscribe((mutation) => {
-      const observedMutationTypes = [
-        `error/${ErrorCommand.mutationTypes.SET_ERROR}`,
-        `error/${ErrorCommand.mutationTypes.REMOVE_ERROR}`
-      ]
-      if (!observedMutationTypes.includes(mutation.type)) return null
-      const errorType = `error/${ErrorCommand.getterTypes.ERROR}`
-      this.error = this.$store.getters[errorType]
-    })
+    const errorType = `error/${ErrorCommand.getterTypes.ERROR}`
+    return this.$store.watch<AppError>(
+      (state, getter) => getter[errorType] as AppError,
+      (error: AppError) => (this.error = error),
+      { deep: true }
+    )
+  }
+
+  destroyed() {
+    if (this.unsubscribe !== null) {
+      this.unsubscribe()
+    }
   }
 }
 </script>

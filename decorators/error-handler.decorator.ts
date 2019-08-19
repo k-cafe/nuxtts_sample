@@ -14,11 +14,9 @@ export const apiErrorHandler = (
 ) => {
   const original = descriptor.value
   descriptor.value = async function(this: BaseRepository, ...args: any[]) {
+    this._commit(`error/${ErrorCommand.mutationTypes.REMOVE_ERROR}`, _, { root: true })
     return await original.apply(this, args)
-      .then((value: any) => {
-        this._commit(`error/${ErrorCommand.mutationTypes.REMOVE_ERROR}`, _, { root: true })
-        return value
-      }).catch((error: FirebaseError) => {
+    .catch((error: FirebaseError) => {
         console.log(error)
         const appError = Mapper.value(error.code, mappingObject)
         this._commit(

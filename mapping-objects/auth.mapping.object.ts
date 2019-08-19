@@ -10,6 +10,11 @@ export const FirebaseAuthorizationErrors: MappingObject<AppError> = {
   'auth/user-not-found': new AppError({
     code: 'FA0001',
     message: 'USER NOT FOUND',
-    description: '認証エラー'
+    description: '認証エラーです'
+  }),
+  'auth/wrong-password': new AppError({
+    code: 'FA0002',
+    message: 'WRONG PASSWORD',
+    description: '認証エラーです'
   })
 }
