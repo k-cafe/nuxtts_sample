@@ -3,8 +3,7 @@ import { auth } from '~/plugins/firebase-initializer'
 import { apiErrorHandler } from '~/decorators/error-handler.decorator'
 import { FirebaseAuthorizationErrors } from '~/mapping-objects/auth.mapping.object'
 import { BaseRepository } from '~/interfaces/base-repository.interface'
-import { Nullable } from '~/typealias'
-import { AppError } from '~/models/error.model'
+import { Nullable, AppErrorOr } from '~/typealias'
 
 export class AuthRepository implements BaseRepository {
   _commit: Commit
@@ -19,7 +18,7 @@ export class AuthRepository implements BaseRepository {
   }: {
     email: string
     password: string
-  }): Promise<firebase.auth.UserCredential | AppError> {
+  }): Promise<AppErrorOr<firebase.auth.UserCredential>> {
     return auth.signInWithEmailAndPassword(email, password)
   }
 
@@ -28,7 +27,6 @@ export class AuthRepository implements BaseRepository {
     return auth.signOut()
   }
 
-  @apiErrorHandler(FirebaseAuthorizationErrors)
   fetchCurrentUserIfSignedIn(): Promise<Nullable<firebase.User>> {
     return new Promise<Nullable<firebase.User>>((resolve, reject) => {
       auth.onAuthStateChanged(
