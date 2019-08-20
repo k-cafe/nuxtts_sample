@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { setTimeout } from 'timers'
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
 import { LifecycleHook } from '~/interfaces/lifecycle-hook.interface'
 import { Nullable } from '~/typealias'
 import { VuexExtention } from '~/types'
@@ -69,7 +69,9 @@ export default class SplashComponent extends Vue
     this.unsubscribe = this.setSignedInUserSubscriber()
   }
 
-  beforeDestroy() {
+  @Watch('isLoading', { immediate: true })
+  onChanged(loadingState: boolean) {
+    if (loadingState) return
     if (this.unsubscribe === null) return
     this.unsubscribe()
   }

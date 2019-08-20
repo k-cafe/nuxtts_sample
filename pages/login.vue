@@ -95,6 +95,8 @@ export default class LoginComponent extends Vue implements CanMove {
     this.isAuthorizing = false
   }
 
-  moveTo() {}
+  moveTo() {
+    this.$router.replace({ name: 'index' })
+  }
 }
 </script>

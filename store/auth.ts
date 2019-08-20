@@ -5,6 +5,8 @@ import { VuexExtention } from '~/types/'
 import { AuthRepository } from '~/repositories/auth.repository'
 import { Nullable, UserId } from '~/typealias'
 
+const LogoutUid = ''
+
 const mutationTypes: VuexExtention.StoreProperty = {
   SET_SIGNIN_USER: '[Auth] Set Signin User',
   SET_ID_TOKEN_RESULT: '[Auth] Set IdTokenResult',
@@ -21,7 +23,7 @@ const actionTypes: VuexExtention.StoreProperty = {
 const getterTypes: VuexExtention.StoreProperty = {
   IS_AUTHORIZED: '[Auth] Is Authorized',
   IS_TOKEN_EXPIRED: '[Auth] Is Token Expired',
-  IS_INITIALIZED: '[Auth] Is Authorized'
+  IS_INITIALIZED: '[Auth] Is Initialized'
 }
 
 interface State {
@@ -95,11 +97,17 @@ export const actions: VuexExtention.ActionNode<
     if (state.authRepository === null) return
     const firebaseUser = await state.authRepository.fetchCurrentUserIfSignedIn()
     if (firebaseUser === null) {
-      commit(mutationTypes.SET_SIGNIN_USER, { uid: '' })
+      commit(mutationTypes.SET_SIGNIN_USER, { uid: LogoutUid })
       return
     }
     commit(mutationTypes.SET_SIGNIN_USER, { uid: firebaseUser.uid })
     const idTokenResult = await firebaseUser.getIdTokenResult()
     commit(mutationTypes.SET_ID_TOKEN_RESULT, { idTokenResult })
+  },
+  async [actionTypes.SIGN_OUT]({ state, commit }: ActionContext<State, any>) {
+    if (state.authRepository === null) return
+    await state.authRepository.signOut()
+    commit(mutationTypes.SET_SIGNIN_USER, { uid: LogoutUid })
+    commit(mutationTypes.SET_ID_TOKEN_RESULT, { idTokenResult: null })
   }
 }

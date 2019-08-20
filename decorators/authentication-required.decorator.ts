@@ -13,9 +13,7 @@ export const authenticationRequired = <T extends ClassObject>(
 ) => {
   return class AuthenticationRequired extends originComponent implements VuexExtention.PageComponent {
     fetch({ redirect, store }: Context) {
-      if (!store.getters[`auth/${AuthCommand.getterTypes.IS_INITIALIZED}`])
-        return
-
+      if (isFirstAccessed(store)) return
       AuthRepository.isAuthorized().then((isAuthorized) => {
         if (isAuthorized) return
         redirectLoginPage(redirect, store)
@@ -23,6 +21,8 @@ export const authenticationRequired = <T extends ClassObject>(
     }
   }
 }
+
+const isFirstAccessed = (store: Store<any>) => !store.getters[`auth/${AuthCommand.getterTypes.IS_INITIALIZED}`]
 
 const redirectLoginPage = (redirect: (path: string) => void, store: Store<any>) => {
   const title = Mapper.value('login', PageTitles)
