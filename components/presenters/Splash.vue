@@ -40,7 +40,7 @@ export default class SplashComponent extends Vue
   }
 
   private isNoSignedInUser(mutationType: string): boolean {
-    const setSignInUser = `auth/${AuthCommand.mutationTypes.SET_SIGNIN_USER}`
+    const setSignInUser = `auth/${AuthCommand.mutationTypes.SET_SIGN_IN_USER}`
     return mutationType !== setSignInUser
   }
 

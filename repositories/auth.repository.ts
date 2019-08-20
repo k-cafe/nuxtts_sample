@@ -1,10 +1,10 @@
 import { Commit } from 'vuex'
-import { FirebaseError } from 'firebase'
 import { auth } from '~/plugins/firebase-initializer'
 import { apiErrorHandler } from '~/decorators/error-handler.decorator'
 import { FirebaseAuthorizationErrors } from '~/mapping-objects/auth.mapping.object'
 import { BaseRepository } from '~/interfaces/base-repository.interface'
 import { Nullable } from '~/typealias'
+import { AppError } from '~/models/error.model'
 
 export class AuthRepository implements BaseRepository {
   _commit: Commit
@@ -19,7 +19,7 @@ export class AuthRepository implements BaseRepository {
   }: {
     email: string
     password: string
-  }): Promise<firebase.auth.UserCredential | FirebaseError> {
+  }): Promise<firebase.auth.UserCredential | AppError> {
     return auth.signInWithEmailAndPassword(email, password)
   }
 
