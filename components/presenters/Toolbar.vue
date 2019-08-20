@@ -11,11 +11,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { CanMove } from '~/interfaces/can-move.interface'
 import { Drawer } from '~/interfaces/drawer.interface'
 import { commandTypes as AuthCommand } from '~/store/auth'
 
 @Component
-export default class ToolbarComponent extends Vue {
+export default class ToolbarComponent extends Vue implements CanMove {
   private title = 'Nuxt.js Sample'
 
   @Prop()
@@ -32,6 +33,10 @@ export default class ToolbarComponent extends Vue {
   private async logout() {
     await this.$store.dispatch(`auth/${AuthCommand.actionTypes.SIGN_OUT}`)
     if (this.$route.name === 'login') return
+    await this.moveTo()
+  }
+
+  async moveTo() {
     await this.$router.replace({ name: 'login' })
   }
 }
