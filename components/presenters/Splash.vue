@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts">
-import { setTimeout } from 'timers'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { LifecycleHook } from '../../interfaces/lifecycle-hook.interface'
 import { Nullable } from '../../typealias'
@@ -49,21 +48,18 @@ export default class SplashComponent extends Vue
     return this.$store.getters[isAuthorized]
   }
 
-  private redirectLoginPage() {
-    this.moveTo()
+  private async redirectLoginPage() {
+    await this.moveTo()
+    // Pageの描画処理を待つ
+    this.showPage()
   }
 
   private showPage() {
     this.isLoading = false
   }
 
-  moveTo() {
-    this.$nuxt.$router.replace({ name: 'login' }).then(() => {
-      // Pageの描画処理を待つ
-      setTimeout(() => {
-        this.showPage()
-      }, 500)
-    })
+  async moveTo() {
+    await this.$nuxt.$router.replace({ name: 'login' })
   }
 
   created() {
