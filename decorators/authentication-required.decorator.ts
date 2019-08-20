@@ -6,11 +6,12 @@ import { commandTypes as AuthCommand } from '~/store/auth'
 import { Mapper } from '~/models/mapper.model'
 import { PageTitles } from '~/mapping-objects/page-title.mapping.object'
 import { Store } from 'vuex';
+import { ClassObject } from '~/typealias';
 
-export const authenticationRequired = <T extends { new (...args: any[]): {} }>(
+export const authenticationRequired = <T extends ClassObject>(
   originComponent: T
 ) => {
-  return class extends originComponent implements VuexExtention.PageComponent {
+  return class AuthenticationRequired extends originComponent implements VuexExtention.PageComponent {
     fetch({ redirect, store }: Context) {
       if (!store.getters[`auth/${AuthCommand.getterTypes.IS_INITIALIZED}`])
         return
