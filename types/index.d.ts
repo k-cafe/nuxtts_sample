@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { Context } from '@nuxt/vue-app'
 
 // declare module '@nuxt/vue-app/types/index' {
 //   interface Context {
@@ -37,5 +38,9 @@ declare namespace VuexExtention {
   interface CommitOptions {
     silent?: boolean
     root?: boolean
+  }
+
+  interface PageComponent {
+    fetch?(ctx: Context): void | Promise<void>
   }
 }

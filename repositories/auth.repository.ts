@@ -11,6 +11,19 @@ export class AuthRepository implements BaseRepository {
     this._commit = commit
   }
 
+  static isAuthorized(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      auth.onAuthStateChanged(
+        (user) => {
+          resolve(user !== null)
+        },
+        () => {
+          reject(false)
+        }
+      )
+    })
+  }
+
   @apiErrorHandler(FirebaseAuthorizationErrors)
   async signInWithEmailAndPassword({
     email,
@@ -37,19 +50,6 @@ export class AuthRepository implements BaseRepository {
         (error) => {
           console.log(error)
           reject(null)
-        }
-      )
-    })
-  }
-
-  static isAuthorized(): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      auth.onAuthStateChanged(
-        (user) => {
-          resolve(user !== null)
-        },
-        () => {
-          reject(false)
         }
       )
     })

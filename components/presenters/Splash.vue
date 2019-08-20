@@ -34,7 +34,7 @@ export default class SplashComponent extends Vue
       if (!this.isAuthorized) {
         this.redirectLoginPage()
       } else {
-        this.showCurrentPage()
+        this.showPage()
       }
     })
   }
@@ -53,7 +53,7 @@ export default class SplashComponent extends Vue
     this.moveTo()
   }
 
-  private showCurrentPage() {
+  private showPage() {
     this.isLoading = false
   }
 
@@ -61,8 +61,8 @@ export default class SplashComponent extends Vue
     this.$nuxt.$router.replace({ name: 'login' }).then(() => {
       // Pageの描画処理を待つ
       setTimeout(() => {
-        this.isLoading = false
-      }, 300)
+        this.showPage()
+      }, 500)
     })
   }
 

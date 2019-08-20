@@ -13,3 +13,12 @@
     </v-flex>
   </v-layout>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import { authenticationRequired } from '~/decorators/authentication-required.decorator'
+
+@Component
+@authenticationRequired
+export default class InspireComponent extends Vue {}
+</script>

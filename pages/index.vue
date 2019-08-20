@@ -59,10 +59,11 @@
   </v-layout>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import Logo from '~/components/Logo.vue'
+import { authenticationRequired } from '~/decorators/authentication-required.decorator'
 
 @Component({
   components: {
@@ -70,5 +71,6 @@ import VuetifyLogo from '~/components/VuetifyLogo.vue'
     'vuetify-logo': VuetifyLogo
   }
 })
+@authenticationRequired
 export default class IndexComponent extends Vue {}
 </script>

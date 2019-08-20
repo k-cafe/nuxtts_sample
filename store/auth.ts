@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from 'util'
+import { isNullOrUndefined, isNull } from 'util'
 import moment from 'moment'
 import { ActionContext, Commit } from 'vuex/types/index'
 import { VuexExtention } from '~/types/'
@@ -20,7 +20,8 @@ const actionTypes: VuexExtention.StoreProperty = {
 
 const getterTypes: VuexExtention.StoreProperty = {
   IS_AUTHORIZED: '[Auth] Is Authorized',
-  IS_TOKEN_EXPIRED: '[Auth] Is Token Expired'
+  IS_TOKEN_EXPIRED: '[Auth] Is Token Expired',
+  IS_INITIALIZED: '[Auth] Is Authorized'
 }
 
 interface State {
@@ -42,10 +43,12 @@ export const state = (): State => ({
 })
 
 export const getters: VuexExtention.GetterNode<State> = {
+  [getterTypes.IS_INITIALIZED]: (state: State) =>
+    !isNull(state.currentUserUid),
   [getterTypes.IS_AUTHORIZED]: (state: State) =>
-    !isNullOrUndefined(state.currentUserUid),
+    !isNull(state.currentUserUid) && state.currentUserUid !== '',
   [getterTypes.IS_TOKEN_EXPIRED]: (state: State) => {
-    if (isNullOrUndefined(state.idTokenResult)) return true
+    if (isNull(state.idTokenResult)) return true
     const expirationTime = +state.idTokenResult.expirationTime
     const currentTime = +moment()
     return currentTime - expirationTime > 0
@@ -92,7 +95,7 @@ export const actions: VuexExtention.ActionNode<
     if (state.authRepository === null) return
     const firebaseUser = await state.authRepository.fetchCurrentUserIfSignedIn()
     if (firebaseUser === null) {
-      commit(mutationTypes.SET_SIGNIN_USER, { uid: null })
+      commit(mutationTypes.SET_SIGNIN_USER, { uid: '' })
       return
     }
     commit(mutationTypes.SET_SIGNIN_USER, { uid: firebaseUser.uid })
