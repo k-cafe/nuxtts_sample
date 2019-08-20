@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { setTimeout } from 'timers'
-import { Component, Vue, Watch } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import { LifecycleHook } from '~/interfaces/lifecycle-hook.interface'
 import { Nullable } from '~/typealias'
 import { VuexExtention } from '~/types'
@@ -51,7 +51,6 @@ export default class SplashComponent extends Vue
 
   private async redirectSignInPage() {
     await this.moveTo()
-    // Pageの描画処理を待つ
     setTimeout(() => {
       this.showPage()
     }, 300)
@@ -69,9 +68,14 @@ export default class SplashComponent extends Vue
     this.unsubscribe = this.setSignedInUserSubscriber()
   }
 
-  @Watch('isLoading', { immediate: true })
-  onChanged(loadingState: boolean) {
-    if (loadingState) return
+  updated() {
+    // DOM要素をレンダリングする際に使用する変数が
+    // isLoading以外に追加された場合は
+    // @Watch('isLoading')の関数内にbeforeDestroyの内容を記述すること
+    this.$destroy()
+  }
+
+  beforeDestroy() {
     if (this.unsubscribe === null) return
     this.unsubscribe()
   }
