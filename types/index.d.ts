@@ -1,4 +1,5 @@
 import { Context } from '@nuxt/vue-app'
+import { CommitOptions, ActionContext } from 'vuex'
 
 // declare module '@nuxt/vue-app/types/index' {
 //   interface Context {
@@ -31,15 +32,6 @@ declare namespace VuexExtention {
   }
 
   interface ActionNode<S, R> {
-    [key: string]: (context: R, payload?: any) => void
-  }
-
-  interface CommitOptions {
-    silent?: boolean
-    root?: boolean
-  }
-
-  interface PageComponent {
-    fetch?(ctx: Context): void | Promise<void>
+    [key: string]: (context: ActionContext<S, R>, payload?: any) => void
   }
 }

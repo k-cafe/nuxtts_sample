@@ -1,17 +1,17 @@
 import { Context } from '@nuxt/vue-app'
 import { Store } from 'vuex'
-import { VuexExtention } from '~/types'
 import { commandTypes as PageTitleCommand } from '~/store/page-title'
 import { commandTypes as AuthCommand } from '~/store/auth'
 import { Mapper } from '~/models/mapper.model'
 import { PageTitles } from '~/mapping-objects/page-title.mapping.object'
 import { ClassObject } from '~/typealias'
+import { PageComponent } from '~/interfaces/page-component.interface'
 
 export const authenticationRequired = <T extends ClassObject>(
   originComponent: T
 ) => {
   return class AuthenticationRequired extends originComponent
-    implements VuexExtention.PageComponent {
+    implements PageComponent {
     fetch({ redirect, store }: Context) {
       if (isFirstAccessed(store)) return
       const isAuthorized =

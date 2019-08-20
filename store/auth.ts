@@ -73,7 +73,7 @@ export const mutations: VuexExtention.MutationNode<State> = {
 
 export const actions: VuexExtention.ActionNode<
   State,
-  ActionContext<State, any>
+  any
 > = {
   async [actionTypes.INITIALIZE]({ state, commit, dispatch }) {
     commit(mutationTypes.SET_REPOSITORY, { commit })
