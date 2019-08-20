@@ -28,15 +28,15 @@ export const state = (): State => ({
 })
 
 export const getters: VuexExtention.GetterNode<State> = {
-  [getterTypes.ERROR]: (state: State) => state.error,
-  [getterTypes.HAS_ERROR]: (state: State) => state.error !== null
+  [getterTypes.ERROR]: (state) => state.error,
+  [getterTypes.HAS_ERROR]: (state) => state.error !== null
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
-  [mutationTypes.SET_ERROR](state: State, { error }: { error: AppError }) {
+  [mutationTypes.SET_ERROR](state, { error }: { error: AppError }) {
     state.error = error
   },
-  [mutationTypes.REMOVE_ERROR](state: State) {
+  [mutationTypes.REMOVE_ERROR](state) {
     state.error = null
   }
 }

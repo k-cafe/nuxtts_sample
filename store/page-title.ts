@@ -23,14 +23,11 @@ export const state = (): State => ({
 })
 
 export const getters: VuexExtention.GetterNode<State> = {
-  [getterTypes.CURRENT_PAGE_TITLE]: (state: State) => state.currentPageTitle
+  [getterTypes.CURRENT_PAGE_TITLE]: (state) => state.currentPageTitle
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
-  [mutationTypes.SET_CURRENT_TITLE]: (
-    state: State,
-    { title }: { title: string }
-  ) => {
+  [mutationTypes.SET_CURRENT_TITLE]: (state, { title }: { title: string }) => {
     state.currentPageTitle = title
   }
 }

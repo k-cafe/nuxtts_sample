@@ -27,6 +27,7 @@ export const apiErrorHandler = (
         },
         { root: true }
       )
+      return error
     })
   }
 }

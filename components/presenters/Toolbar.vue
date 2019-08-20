@@ -29,8 +29,10 @@ export default class ToolbarComponent extends Vue {
     this.drawer.isOpened = isOpened
   }
 
-  private logout() {
-    this.$store.dispatch(`auth/${AuthCommand.actionTypes.SIGN_OUT}`)
+  private async logout() {
+    await this.$store.dispatch(`auth/${AuthCommand.actionTypes.SIGN_OUT}`)
+    if (this.$route.name === 'login') return
+    await this.$router.replace({ name: 'login' })
   }
 }
 </script>

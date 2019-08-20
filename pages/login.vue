@@ -83,7 +83,7 @@ export default class LoginComponent extends Vue implements CanMove {
   // methods
   private async login() {
     this.isAuthorizing = true
-    const isSucceeded = await this.$store.dispatch(
+    const isSucceeded: boolean = await this.$store.dispatch(
       `auth/${AuthCommand.actionTypes.SIGN_IN}`,
       {
         email: this.email,
@@ -91,7 +91,7 @@ export default class LoginComponent extends Vue implements CanMove {
       }
     )
 
-    if (!isSucceeded) this.moveTo()
+    if (isSucceeded) this.moveTo()
     this.isAuthorizing = false
   }
 

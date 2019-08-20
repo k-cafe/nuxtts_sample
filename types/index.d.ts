@@ -1,4 +1,3 @@
-import firebase from 'firebase'
 import { Context } from '@nuxt/vue-app'
 
 // declare module '@nuxt/vue-app/types/index' {
