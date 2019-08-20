@@ -31,7 +31,7 @@ export default class SplashComponent extends Vue
   private setSignedInUserSubscriber() {
     return this.$store.subscribe((mutation) => {
       if (this.isNoSignedInUser(mutation.type)) return
-      if (this.isAuthorized && this.$route.name !== 'login') {
+      if (!this.isAuthorized && this.$route.name !== 'login') {
         this.redirectSignInPage()
       } else {
         this.showPage()
