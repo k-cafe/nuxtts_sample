@@ -21,7 +21,7 @@ import Body from '~/components/presenters/Body.vue'
 import Toolbar from '~/components/presenters/Toolbar.vue'
 import Navigator from '~/components/presenters/Navigator.vue'
 import PageTitle from '~/components/presenters/PageTitle.vue'
-import { Drawer } from '~/interfaces/drawer.interface'
+import { Drawer } from '~/models/drawer.model'
 
 @Component({
   components: {

@@ -1,4 +1,3 @@
-import { Context } from '@nuxt/vue-app'
 import { CommitOptions, ActionContext } from 'vuex'
 
 // declare module '@nuxt/vue-app/types/index' {

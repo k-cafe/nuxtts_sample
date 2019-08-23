@@ -3,9 +3,10 @@ import { Store } from 'vuex'
 import { commandTypes as PageTitleCommand } from '~/store/page-title'
 import { commandTypes as AuthCommand } from '~/store/auth'
 import { Mapper } from '~/models/mapper.model'
-import { PageTitles } from '~/mapping-objects/page-title.mapping.object'
+import { Pages } from '~/mapping-objects/page.mapping-object'
 import { ClassObject } from '~/typealias'
 import { PageComponent } from '~/interfaces/page-component.interface'
+import { REDIRECT_ROUTE_NAME } from '~/configurations'
 
 export const authenticationRequired = <T extends ClassObject>(
   originComponent: T
@@ -29,10 +30,10 @@ const redirectLoginPage = (
   redirect: (path: string) => void,
   store: Store<any>
 ) => {
-  const title = Mapper.value('login', PageTitles)
+  const navigator = Mapper.value(REDIRECT_ROUTE_NAME, Pages)
   store.commit(
     `page-title/${PageTitleCommand.mutationTypes.SET_CURRENT_TITLE}`,
-    { title }
+    { title: navigator.title }
   )
-  redirect('/login')
+  redirect(navigator.to)
 }

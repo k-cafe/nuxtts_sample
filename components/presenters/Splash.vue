@@ -21,6 +21,7 @@ import { Nullable } from '~/typealias'
 import { VuexExtention } from '~/types'
 import { CanMove } from '~/interfaces/can-move.interface'
 import { commandTypes as AuthCommand } from '~/store/auth'
+import { REDIRECT_ROUTE_NAME } from '~/configurations'
 
 @Component
 export default class SplashComponent extends Vue
@@ -31,7 +32,7 @@ export default class SplashComponent extends Vue
   private setSignedInUserSubscriber() {
     return this.$store.subscribe((mutation) => {
       if (this.isNoSignedInUser(mutation.type)) return
-      if (!this.isAuthorized && this.$route.name !== 'login') {
+      if (!this.isAuthorized && this.$route.name !== REDIRECT_ROUTE_NAME) {
         this.redirectSignInPage()
       } else {
         this.showPage()
@@ -61,7 +62,7 @@ export default class SplashComponent extends Vue
   }
 
   async moveTo() {
-    await this.$nuxt.$router.replace({ name: 'login' })
+    await this.$nuxt.$router.replace({ name: REDIRECT_ROUTE_NAME })
   }
 
   created() {

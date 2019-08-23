@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { ActionContext, Commit } from 'vuex/types/index'
+import { Commit } from 'vuex/types/index'
 import { VuexExtention } from '~/types/'
 import { AuthRepository } from '~/repositories/auth.repository'
 import { Nullable, UserId } from '~/typealias'
@@ -71,10 +71,7 @@ export const mutations: VuexExtention.MutationNode<State> = {
   }
 }
 
-export const actions: VuexExtention.ActionNode<
-  State,
-  any
-> = {
+export const actions: VuexExtention.ActionNode<State, any> = {
   async [actionTypes.INITIALIZE]({ state, commit, dispatch }) {
     commit(mutationTypes.SET_REPOSITORY, { commit })
     if (state.authRepository === null) return
