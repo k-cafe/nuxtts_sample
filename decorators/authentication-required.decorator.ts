@@ -1,5 +1,4 @@
 import { Context } from '@nuxt/vue-app'
-import { Store } from 'vuex'
 import { commandTypes as PageTitleCommand } from '~/store/page-title'
 import { commandTypes as AuthCommand } from '~/store/auth'
 import { Mapper } from '~/models/mapper.model'
@@ -16,12 +15,9 @@ export const authenticationRequired = <T extends ClassObject>(
     fetch(context: Context) {
       callSuperFetchIfDefined(context, super.fetch)
 
-      if (isFirstAccessed(context.store)) return
-      
-      const isAuthorized =
-        context.store.getters[`auth/${AuthCommand.getterTypes.IS_AUTHORIZED}`]
-      if (isAuthorized) return
-      redirectLoginPage(context.redirect, context.store)
+      if (isFirstAccessed(context) || isAuthorized(context)) return
+
+      redirectLoginPage(context)
     }
   }
 }
@@ -32,13 +28,13 @@ const callSuperFetchIfDefined = (context: Context, superFetch: Function) => {
   }
 }
 
-const isFirstAccessed = (store: Store<any>) =>
+const isFirstAccessed = ({ store }: Context) =>
   !store.getters[`auth/${AuthCommand.getterTypes.IS_INITIALIZED}`]
 
-const redirectLoginPage = (
-  redirect: (path: string) => void,
-  store: Store<any>
-) => {
+const isAuthorized = ({ store }: Context) =>
+  store.getters[`auth/${AuthCommand.getterTypes.IS_AUTHORIZED}`]
+
+const redirectLoginPage = ({ redirect, store }: Context) => {
   const navigator = Mapper.value(REDIRECT_ROUTE_NAME, Pages)
   store.commit(
     `page-title/${PageTitleCommand.mutationTypes.SET_CURRENT_TITLE}`,

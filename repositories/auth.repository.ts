@@ -12,7 +12,7 @@ export class AuthRepository implements BaseRepository {
   }
 
   @apiErrorHandler(FirebaseAuthorizationErrors)
-  async signInWithEmailAndPassword({
+  signInWithEmailAndPassword({
     email,
     password
   }: {
