@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { CanMove } from '~/interfaces/can-move.interface'
+import { CanMove } from '~/extensions/can-move.interface'
 import { Drawer } from '~/models/drawer.model'
 import { commandTypes as AuthCommand } from '~/store/auth'
 import { APP_TITLE, REDIRECT_ROUTE_NAME } from '~/configurations'

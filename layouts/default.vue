@@ -14,13 +14,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import Splash from '../components/presenters/Splash.vue'
-import AppError from '~/components/presenters/Error.vue'
-import Footer from '~/components/presenters/Footer.vue'
-import Body from '~/components/presenters/Body.vue'
-import Toolbar from '~/components/presenters/Toolbar.vue'
-import Navigator from '~/components/presenters/Navigator.vue'
-import PageTitle from '~/components/presenters/PageTitle.vue'
+import Splash from '../components/layouts/Splash.vue'
+import AppError from '~/components/layouts/Error.vue'
+import Footer from '~/components/layouts/Footer.vue'
+import Body from '~/components/layouts/Body.vue'
+import Toolbar from '~/components/layouts/Toolbar.vue'
+import Navigator from '~/components/layouts/Navigator.vue'
+import PageTitle from '~/components/layouts/PageTitle.vue'
 import { Drawer } from '~/models/drawer.model'
 
 @Component({

@@ -16,10 +16,10 @@
 <script lang="ts">
 import { setTimeout } from 'timers'
 import { Component, Vue } from 'nuxt-property-decorator'
-import { LifecycleHook } from '~/interfaces/lifecycle-hook.interface'
+import { LifecycleHook } from '~/extensions/lifecycle-hook.interface'
 import { Nullable } from '~/typealias'
 import { VuexExtention } from '~/types'
-import { CanMove } from '~/interfaces/can-move.interface'
+import { CanMove } from '~/extensions/can-move.interface'
 import { commandTypes as AuthCommand } from '~/store/auth'
 import { REDIRECT_ROUTE_NAME } from '~/configurations'
 

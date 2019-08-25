@@ -5,7 +5,7 @@ import { commandTypes as AuthCommand } from '~/store/auth'
 import { Mapper } from '~/models/mapper.model'
 import { Pages } from '~/mapping-objects/page.mapping-object'
 import { ClassObject } from '~/typealias'
-import { PageComponent } from '~/interfaces/page-component.interface'
+import { PageComponent } from '~/extensions/page-component.interface'
 import { REDIRECT_ROUTE_NAME } from '~/configurations'
 
 export const authenticationRequired = <T extends ClassObject>(

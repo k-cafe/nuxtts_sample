@@ -2,7 +2,7 @@ import { Commit } from 'vuex'
 import { auth } from '~/plugins/firebase-initializer'
 import { apiErrorHandler } from '~/decorators/error-handler.decorator'
 import { FirebaseAuthorizationErrors } from '~/mapping-objects/auth.mapping.object'
-import { BaseRepository } from '~/interfaces/base-repository.interface'
+import { BaseRepository } from '~/extensions/base-repository.interface'
 import { Nullable, AppErrorOr } from '~/typealias'
 
 export class AuthRepository implements BaseRepository {

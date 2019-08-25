@@ -3,7 +3,7 @@ import { MappingObject } from '~/typealias'
 import { AppError } from '~/models/error.model'
 import { Mapper } from '~/models/mapper.model'
 import { commandTypes as ErrorCommand } from '~/store/error'
-import { BaseRepository } from '~/interfaces/base-repository.interface'
+import { BaseRepository } from '~/extensions/base-repository.interface'
 
 export const apiErrorHandler = (
   mappingObject: MappingObject<AppError>

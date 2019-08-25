@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { CanMove } from '~/interfaces/can-move.interface'
+import { CanMove } from '~/extensions/can-move.interface'
 import { commandTypes as AuthCommand } from '~/store/auth'
 
 @Component
