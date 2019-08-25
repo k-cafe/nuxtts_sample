@@ -23,4 +23,3 @@ export const Pages: MappingObject<Navigator> = {
     to: '/inspire'
   }
 }
-

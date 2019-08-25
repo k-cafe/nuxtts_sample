@@ -1,10 +1,11 @@
 import { CommitOptions, ActionContext } from 'vuex'
+import { Context } from '@nuxt/vue-app'
 
-// declare module '@nuxt/vue-app/types/index' {
-//   interface Context {
-//     $auth?: firebase.auth.Auth
-//   }
-// }
+declare module 'vue/types/vue' {
+  interface Vue {
+    fetch?(ctx: Context): Promise<void> | void
+  }
+}
 
 declare namespace VuexExtention {
   type Unwatcher = () => void

@@ -13,13 +13,22 @@ export const authenticationRequired = <T extends ClassObject>(
 ) => {
   return class AuthenticationRequired extends originComponent
     implements PageComponent {
-    fetch({ redirect, store }: Context) {
-      if (isFirstAccessed(store)) return
+    fetch(context: Context) {
+      callSuperFetchIfDefined(context, super.fetch)
+
+      if (isFirstAccessed(context.store)) return
+      
       const isAuthorized =
-        store.getters[`auth/${AuthCommand.getterTypes.IS_AUTHORIZED}`]
+        context.store.getters[`auth/${AuthCommand.getterTypes.IS_AUTHORIZED}`]
       if (isAuthorized) return
-      redirectLoginPage(redirect, store)
+      redirectLoginPage(context.redirect, context.store)
     }
+  }
+}
+
+const callSuperFetchIfDefined = (context: Context, superFetch: Function) => {
+  if (typeof superFetch !== 'undefined') {
+    superFetch(context)
   }
 }
 

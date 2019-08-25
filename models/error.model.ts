@@ -5,7 +5,7 @@ export class AppError {
   stack?: string
 
   constructor(error: Partial<AppError> = {}) {
-    this.code = error.code ||  ''
+    this.code = error.code || ''
     this.message = error.message || ''
     this.description = error.description || ''
     this.stack = error.stack || ''
