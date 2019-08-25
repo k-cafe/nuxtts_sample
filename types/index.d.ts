@@ -1,11 +1,11 @@
 import { CommitOptions, ActionContext } from 'vuex'
 import { Context } from '@nuxt/vue-app'
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    fetch?(ctx: Context): Promise<void> | void
-  }
-}
+// declare module 'vue/types/vue' {
+//   interface Vue {
+//     fetch?(ctx: Context): Promise<void> | void
+//   }
+// }
 
 declare namespace VuexExtention {
   type Unwatcher = () => void
