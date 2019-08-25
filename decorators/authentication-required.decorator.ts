@@ -14,9 +14,9 @@ export const authenticationRequired = <T extends ClassObject>(
     implements PageComponent {
     fetch(context: Context) {
       if (isFirstAccessed(context) || isAuthorized(context)) {
-        redirectLoginPage(context)
-      } else {
         callSuperFetchIfDefined(context, super.fetch)
+      } else {
+        redirectLoginPage(context)
       }
     }
   }
