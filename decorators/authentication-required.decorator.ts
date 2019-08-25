@@ -15,7 +15,9 @@ export const authenticationRequired = <T extends ClassObject>(
     fetch(context: Context) {
       callSuperFetchIfDefined(context, super.fetch)
 
-      if (isFirstAccessed(context) || isAuthorized(context)) return
+      if (isFirstAccessed(context)) return
+
+      if (isAuthorized(context)) return
 
       redirectLoginPage(context)
     }
