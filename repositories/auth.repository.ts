@@ -23,7 +23,7 @@ export class AuthRepository implements BaseRepository {
   }
 
   @apiErrorHandler(FirebaseAuthorizationErrors)
-  signOut(): Promise<void> {
+  signOut(): Promise<AppErrorOr<void>> {
     return auth.signOut()
   }
 

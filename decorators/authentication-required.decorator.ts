@@ -14,7 +14,7 @@ export const authenticationRequired = <T extends ClassObject>(
     implements PageComponent {
     fetch(context: Context) {
       if (isFirstAccessed(context) || isAuthorized(context)) {
-        callSuperFetchIfDefined(context, super.fetch)
+        callSuperMethodIfDefined(context, super.fetch)
       } else {
         redirectLoginPage(context)
       }
@@ -22,7 +22,7 @@ export const authenticationRequired = <T extends ClassObject>(
   }
 }
 
-const callSuperFetchIfDefined = (context: Context, superFetch: Function) => {
+const callSuperMethodIfDefined = (context: Context, superFetch: Function) => {
   if (typeof superFetch !== 'undefined') {
     superFetch(context)
   }

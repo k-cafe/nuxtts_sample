@@ -1,5 +1,4 @@
 import { CommitOptions, ActionContext } from 'vuex'
-import { Context } from '@nuxt/vue-app'
 
 // declare module 'vue/types/vue' {
 //   interface Vue {
