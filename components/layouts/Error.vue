@@ -26,7 +26,7 @@ export default class ErrorComponent extends Vue implements LifecycleHook {
   private watchErrorStore() {
     const errorType = `error/${ErrorCommand.getterTypes.ERROR}`
     return this.$store.watch<AppError>(
-      (state, getter) => getter[errorType],
+      (_, getter) => getter[errorType],
       (error) => (this.error = error),
       { deep: true }
     )

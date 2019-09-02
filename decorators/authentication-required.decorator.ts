@@ -1,4 +1,4 @@
-import { Context } from '@nuxt/vue-app'
+import { Context } from '@nuxt/types'
 import { commandTypes as PageTitleCommand } from '~/store/page-title'
 import { commandTypes as AuthCommand } from '~/store/auth'
 import { Mapper } from '~/models/mapper.model'
