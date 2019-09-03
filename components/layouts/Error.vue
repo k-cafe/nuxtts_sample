@@ -8,41 +8,23 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Nullable } from '~/typealias'
-import { LifecycleHook } from '~/extensions/lifecycle-hook.interface'
 import { AppError } from '~/models/error.model'
-import { VuexExtention } from '~/types'
 import { commandTypes as ErrorCommand } from '~/store/error'
 
 @Component
-export default class ErrorComponent extends Vue implements LifecycleHook {
-  private error: Nullable<AppError> = null
-  private unwatch: Nullable<VuexExtention.Unwatcher> = null
+export default class ErrorComponent extends Vue {
+  get error(): AppError {
+    const command = `error/${ErrorCommand.getterTypes.ERROR}`
+    return this.$store.getters[command]
+  }
 
   private get hasError() {
     return this.error !== null
   }
 
-  private watchErrorStore() {
-    const errorType = `error/${ErrorCommand.getterTypes.ERROR}`
-    return this.$store.watch<AppError>(
-      (_, getter) => getter[errorType],
-      (error) => (this.error = error),
-      { deep: true }
-    )
-  }
-
   private close() {
-    this.error = null
-  }
-
-  created() {
-    this.unwatch = this.watchErrorStore()
-  }
-
-  beforeDestroy() {
-    if (this.unwatch === null) return
-    this.unwatch()
+    const command = `error/${ErrorCommand.mutationTypes.REMOVE_ERROR}`
+    this.$store.commit(command)
   }
 }
 </script>
