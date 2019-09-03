@@ -24,27 +24,27 @@ export const commandTypes: VuexExtention.CommandTypes = {
 }
 
 interface State {
-  user: Nullable<User>
+  user: User
   userRepository: Nullable<UserRepository>
 }
 
 export const state = (): State => ({
-  user: null,
+  user: User.NONE,
   userRepository: null
 })
 
 export const getters: VuexExtention.GetterNode<State> = {
-  [getterTypes.CURRENT_USER]: state => state.user
+  [getterTypes.CURRENT_USER]: (state) => state.user
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
-  [mutationTypes.SET_USER](state, { user }: { user: Nullable<User> }) {
+  [mutationTypes.SET_USER](state, { user }: { user: User }) {
     state.user = user
   }
 }
 
 export const actions: VuexExtention.ActionNode<State, any> = {
-  [actionTypes.INITIALIZE] ({ state, commit }) {
+  [actionTypes.INITIALIZE]({ state, commit }) {
     state.userRepository = new UserRepository(commit)
   }
 }

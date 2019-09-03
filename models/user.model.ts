@@ -1,6 +1,8 @@
 import { UserId } from '~/typealias'
 
 export class User {
+  static NONE = new User()
+
   id: UserId
   displayName: string
   email: string

@@ -13,9 +13,9 @@ import { commandTypes } from '~/store/page-title'
 
 @Component
 export default class PageTitleComponent extends Vue {
-  private get pageTitle() {
-    const state = `page-title/${commandTypes.getterTypes.CURRENT_PAGE_TITLE}`
-    return this.$store.getters[state]
+  private get pageTitle(): string {
+    const command = `page-title/${commandTypes.getterTypes.CURRENT_PAGE_TITLE}`
+    return this.$store.getters[command]
   }
 }
 </script>
