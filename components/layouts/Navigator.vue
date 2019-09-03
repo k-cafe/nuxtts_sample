@@ -1,5 +1,7 @@
 <template>
-  <v-navigation-drawer v-model="isOpened" clipped fixed app>
+  <v-navigation-drawer v-model="isOpened" clipped fixed app temporary>
+    <navigator-profile></navigator-profile>
+    <v-divider></v-divider>
     <v-list>
       <v-list-item
         v-for="(page, i) in pages"
@@ -22,10 +24,15 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import NavigatorProfile from './NavigatorProfile.vue'
 import { Drawer } from '~/models/drawer.model'
 import { Pages } from '~/mapping-objects/page.mapping-object'
 
-@Component
+@Component({
+  components: {
+    'navigator-profile': NavigatorProfile
+  }
+})
 export default class NavigatorComponent extends Vue {
   @Prop()
   drawer!: Drawer
