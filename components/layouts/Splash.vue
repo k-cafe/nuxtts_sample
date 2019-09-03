@@ -54,7 +54,7 @@ export default class SplashComponent extends Vue
     await this.moveTo()
     setTimeout(() => {
       this.showPage()
-    }, 300)
+    }, 200)
   }
 
   private showPage() {

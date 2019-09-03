@@ -16,9 +16,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { authenticationRequired } from '~/decorators/authentication-required.decorator'
 
-@Component
-@authenticationRequired
+@Component({
+  middleware: 'authenticated'
+})
 export default class InspireComponent extends Vue {}
 </script>
