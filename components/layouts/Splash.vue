@@ -29,9 +29,9 @@ export default class SplashComponent extends Vue
   private isLoading = true
   private unsubscribe: Nullable<VuexExtention.Unsubscriber> = null
 
-  private setSignedInUserSubscriber() {
+  private signInUserSubscriber() {
     return this.$store.subscribe((mutation) => {
-      if (this.isNoSignedInUser(mutation.type)) return
+      if (!this.isSetSignedInUserMutation(mutation.type)) return
       if (!this.isAuthorized && this.$route.name !== REDIRECT_ROUTE_NAME) {
         this.redirectSignInPage()
       } else {
@@ -40,9 +40,9 @@ export default class SplashComponent extends Vue
     })
   }
 
-  private isNoSignedInUser(mutationType: string): boolean {
-    const setSignInUser = `auth/${AuthCommand.mutationTypes.SET_SIGN_IN_USER}`
-    return mutationType !== setSignInUser
+  private isSetSignedInUserMutation(mutationType: string): boolean {
+    const setSignInUserMutation = `auth/${AuthCommand.mutationTypes.SET_SIGN_IN_USER}`
+    return mutationType === setSignInUserMutation
   }
 
   private get isAuthorized() {
@@ -54,7 +54,7 @@ export default class SplashComponent extends Vue
     await this.moveTo()
     setTimeout(() => {
       this.showPage()
-    }, 300)
+    }, 200)
   }
 
   private showPage() {
@@ -66,7 +66,7 @@ export default class SplashComponent extends Vue
   }
 
   created() {
-    this.unsubscribe = this.setSignedInUserSubscriber()
+    this.unsubscribe = this.signInUserSubscriber()
   }
 
   updated() {

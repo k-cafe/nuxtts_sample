@@ -1,5 +1,5 @@
 import { Route } from 'vue-router'
-import { Context } from '@nuxt/vue-app'
+import { Context } from '@nuxt/types'
 import { commandTypes } from '~/store/page-title'
 import { Mapper } from '~/models/mapper.model'
 import { Pages } from '~/mapping-objects/page.mapping-object'

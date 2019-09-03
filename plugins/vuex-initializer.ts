@@ -1,4 +1,4 @@
-import { Context } from '@nuxt/vue-app/types/index'
+import { Context } from '@nuxt/types'
 import { commandTypes as AuthCommand } from '~/store/auth'
 
 export default ({ store }: Context) => {
