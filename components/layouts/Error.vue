@@ -14,8 +14,8 @@ import { commandTypes as ErrorCommand } from '~/store/error'
 @Component
 export default class ErrorComponent extends Vue {
   get error(): AppError {
-    const command = `error/${ErrorCommand.getterTypes.ERROR}`
-    return this.$store.getters[command]
+    const error = `error/${ErrorCommand.getterTypes.ERROR}`
+    return this.$store.getters[error]
   }
 
   private get hasError() {

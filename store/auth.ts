@@ -8,7 +8,7 @@ import { isAppError } from '~/utils/is-app-error'
 const SignoutId = ''
 
 const mutationTypes: VuexExtention.StoreProperty = {
-  SET_SIGN_IN_USER: '[Auth] Set Sign In User',
+  SET_SIGN_IN_ID: '[Auth] Set Sign In User_ID',
   SET_ID_TOKEN_RESULT: '[Auth] Set IdTokenResult',
   SET_REPOSITORY: '[Auth] Set Repository'
 }
@@ -57,7 +57,7 @@ export const getters: VuexExtention.GetterNode<State> = {
 }
 
 export const mutations: VuexExtention.MutationNode<State> = {
-  [mutationTypes.SET_SIGN_IN_USER](state, { uid }: { uid: UserId }) {
+  [mutationTypes.SET_SIGN_IN_ID](state, { uid }: { uid: UserId }) {
     state.currentUserId = uid
   },
   [mutationTypes.SET_ID_TOKEN_RESULT](
@@ -96,7 +96,7 @@ export const actions: VuexExtention.ActionNode<State, any> = {
   async [actionTypes.SIGN_OUT]({ state, commit }) {
     if (state.authRepository === null) return
     await state.authRepository.signOut()
-    commit(mutationTypes.SET_SIGN_IN_USER, { uid: SignoutId })
+    commit(mutationTypes.SET_SIGN_IN_ID, { uid: SignoutId })
     commit(mutationTypes.SET_ID_TOKEN_RESULT, { idTokenResult: null })
   },
   async [actionTypes._SET_ALL_SIGN_IN_STATE](
@@ -104,10 +104,10 @@ export const actions: VuexExtention.ActionNode<State, any> = {
     { firebaseUser }: { firebaseUser: Nullable<firebase.User> }
   ) {
     if (firebaseUser === null) {
-      commit(mutationTypes.SET_SIGN_IN_USER, { uid: SignoutId })
+      commit(mutationTypes.SET_SIGN_IN_ID, { uid: SignoutId })
       return
     }
-    commit(mutationTypes.SET_SIGN_IN_USER, { uid: firebaseUser.uid })
+    commit(mutationTypes.SET_SIGN_IN_ID, { uid: firebaseUser.uid })
     const idTokenResult = await firebaseUser.getIdTokenResult()
     commit(mutationTypes.SET_ID_TOKEN_RESULT, { idTokenResult })
   }

@@ -27,22 +27,23 @@ import { REDIRECT_ROUTE_NAME } from '~/configurations'
 export default class SplashComponent extends Vue
   implements LifecycleHook, CanMove {
   private isLoading = true
-  private unsubscribe: Nullable<VuexExtention.Unsubscriber> = null
+  private unwatch: Nullable<VuexExtention.Unwatcher> = null
 
-  private signInUserSubscriber() {
-    return this.$store.subscribe((mutation) => {
-      if (!this.isSetSignedInUserMutation(mutation.type)) return
-      if (!this.isAuthorized && this.$route.name !== REDIRECT_ROUTE_NAME) {
-        this.redirectSignInPage()
-      } else {
-        this.showPage()
+  private watchAuthorizedUserId() {
+    const isInitialized = `auth/${AuthCommand.getterTypes.IS_INITIALIZED}`
+    return this.$store.watch(
+      (_, getters) => getters[isInitialized],
+      (newValue) => {
+        if (!newValue) {
+          return
+        }
+        if (!this.isAuthorized && this.$route.name !== REDIRECT_ROUTE_NAME) {
+          this.redirectSignInPage()
+        } else {
+          this.showPage()
+        }
       }
-    })
-  }
-
-  private isSetSignedInUserMutation(mutationType: string): boolean {
-    const setSignInUserMutation = `auth/${AuthCommand.mutationTypes.SET_SIGN_IN_USER}`
-    return mutationType === setSignInUserMutation
+    )
   }
 
   private get isAuthorized() {
@@ -66,7 +67,7 @@ export default class SplashComponent extends Vue
   }
 
   created() {
-    this.unsubscribe = this.signInUserSubscriber()
+    this.unwatch = this.watchAuthorizedUserId()
   }
 
   updated() {
@@ -77,8 +78,8 @@ export default class SplashComponent extends Vue
   }
 
   beforeDestroy() {
-    if (this.unsubscribe === null) return
-    this.unsubscribe()
+    if (this.unwatch === null) return
+    this.unwatch()
   }
 }
 </script>

@@ -33,8 +33,8 @@ import { commandTypes } from '~/store/user'
 })
 export default class NavigatorProfile extends Vue {
   get user(): User {
-    const currentUserCommand = `user/${commandTypes.getterTypes.CURRENT_USER}`
-    return this.$store.getters[currentUserCommand]
+    const currentUser = `user/${commandTypes.getterTypes.CURRENT_USER}`
+    return this.$store.getters[currentUser]
   }
 }
 </script>
