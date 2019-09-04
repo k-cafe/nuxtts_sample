@@ -9,12 +9,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { commandTypes } from '~/store/page-title'
+import { types as PageTitleCommand } from '~/store/page-title/types'
 
 @Component
 export default class PageTitleComponent extends Vue {
   private get pageTitle(): string {
-    const currentPageTitle = `page-title/${commandTypes.getterTypes.CURRENT_PAGE_TITLE}`
+    const currentPageTitle = `page-title/${PageTitleCommand.getterTypes.CURRENT_PAGE_TITLE}`
     return this.$store.getters[currentPageTitle]
   }
 }

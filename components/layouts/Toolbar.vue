@@ -13,7 +13,7 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { CanMove } from '~/extensions/can-move.interface'
 import { Drawer } from '~/models/drawer.model'
-import { commandTypes as AuthCommand } from '~/store/auth'
+import { types as AuthCommand } from '~/store/auth/types'
 import { APP_TITLE, REDIRECT_ROUTE_NAME } from '~/configurations'
 
 @Component

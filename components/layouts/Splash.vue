@@ -20,7 +20,7 @@ import { LifecycleHook } from '~/extensions/lifecycle-hook.interface'
 import { Nullable } from '~/typealias'
 import { VuexExtention } from '~/types'
 import { CanMove } from '~/extensions/can-move.interface'
-import { commandTypes as AuthCommand } from '~/store/auth'
+import { types as AuthCommand } from '~/store/auth/types'
 import { REDIRECT_ROUTE_NAME } from '~/configurations'
 
 @Component
@@ -29,7 +29,7 @@ export default class SplashComponent extends Vue
   private isLoading = true
   private unwatch: Nullable<VuexExtention.Unwatcher> = null
 
-  private watchAuthorizedUserId() {
+  private watchAuthorizedUserId(): VuexExtention.Unwatcher {
     const isInitialized = `auth/${AuthCommand.getterTypes.IS_INITIALIZED}`
     return this.$store.watch(
       (_, getters) => getters[isInitialized],
@@ -46,7 +46,7 @@ export default class SplashComponent extends Vue
     )
   }
 
-  private get isAuthorized() {
+  private get isAuthorized(): boolean {
     const isAuthorized = `auth/${AuthCommand.getterTypes.IS_AUTHORIZED}`
     return this.$store.getters[isAuthorized]
   }

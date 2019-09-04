@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { AppError } from '~/models/error.model'
-import { commandTypes as ErrorCommand } from '~/store/error'
+import { types as ErrorCommand } from '~/store/error/types'
 
 @Component
 export default class ErrorComponent extends Vue {
@@ -18,7 +18,7 @@ export default class ErrorComponent extends Vue {
     return this.$store.getters[error]
   }
 
-  private get hasError() {
+  private get hasError(): boolean {
     return this.error !== null
   }
 

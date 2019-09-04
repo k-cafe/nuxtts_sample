@@ -1,6 +1,6 @@
 import { Context } from '@nuxt/types'
-import { commandTypes as PageTitleCommand } from '~/store/page-title'
-import { commandTypes as AuthCommand } from '~/store/auth'
+import { types as PageTitleCommand } from '~/store/page-title/types'
+import { types as AuthCommand } from '~/store/auth/types'
 import { Mapper } from '~/models/mapper.model'
 import { Pages } from '~/mapping-objects/page.mapping-object'
 import { REDIRECT_ROUTE_NAME } from '~/configurations'

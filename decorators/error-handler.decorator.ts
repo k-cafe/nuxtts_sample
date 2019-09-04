@@ -2,7 +2,7 @@ import { FirebaseError } from 'firebase'
 import { MappingObject } from '~/typealias'
 import { AppError } from '~/models/error.model'
 import { Mapper } from '~/models/mapper.model'
-import { commandTypes as ErrorCommand } from '~/store/error'
+import { types as ErrorCommand } from '~/store/error/types'
 import { BaseRepository } from '~/extensions/base-repository.interface'
 
 export const apiErrorHandler = (
