@@ -26,7 +26,7 @@ import { REDIRECT_ROUTE_NAME } from '~/configurations'
 @Component
 export default class SplashComponent extends Vue
   implements LifecycleHook, CanMove {
-  private isLoading = true
+  private isLoading = false
   private unwatch: Nullable<VuexExtention.Unwatcher> = null
 
   private watchAuthorizedUserId(): VuexExtention.Unwatcher {
